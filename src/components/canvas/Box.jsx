@@ -7,12 +7,11 @@ const BoxComponent = ({ route }) => {
   const mesh = useRef(null);
   const vec = new THREE.Vector3();
   // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
   // Subscribe this component to the render-loop, rotate the mesh every frame
   useFrame(({ camera }, delta) => {
-    active ? vec.set(1, 2, 1) : vec.set(0, 1, 2);
-
+    active ? vec.set(2, 0, 1.9) : vec.set(0, 0, 1.9);
+    camera.fov = 50;
     camera.lookAt(0, 0, 0);
     camera.position.lerp(vec, 0.06);
     camera.updateProjectionMatrix();
@@ -20,11 +19,7 @@ const BoxComponent = ({ route }) => {
   // Return the view, these are regular Threejs elements expressed in JSX
   return (
     <>
-      <mesh
-        ref={mesh}
-        onClick={() => setActive(!active)}
-        scale={hovered ? 1.1 : 1}
-      >
+      <mesh ref={mesh} onClick={() => setActive(!active)}>
         <boxBufferGeometry args={[1, 1, 1]} />
         <meshPhysicalMaterial color='darkcyan' />
       </mesh>
