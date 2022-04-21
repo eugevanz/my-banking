@@ -1,11 +1,11 @@
-import useStore from '@/helpers/store'
-import { useEffect, useRef } from 'react'
+import useStore from '@/helpers/store';
+import { useEffect, useRef } from 'react';
 
 const Dom = ({ children }) => {
-  const ref = useRef(null)
+  const ref = useRef(null);
   useEffect(() => {
-    useStore.setState({ dom: ref })
-  }, [])
+    useStore.setState({ dom: ref });
+  }, []);
 
   return (
     <div
@@ -14,7 +14,7 @@ const Dom = ({ children }) => {
     >
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default Dom
+export default Dom;

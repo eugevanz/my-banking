@@ -55,10 +55,10 @@ const Page = () => {
       {/* Simply add the r3f prop to the parent component -> */}
       <MeshComponent r3f />
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
 ```
 
 ### :control_knobs: Available Scripts
