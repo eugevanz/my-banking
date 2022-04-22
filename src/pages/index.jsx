@@ -1,6 +1,24 @@
 import dynamic from 'next/dynamic';
-// import Shader from '@/components/canvas/Shader/Shader'
-// import Box from '@/components/canvas/Box'
+import supabase from '../helpers/supabaseClient';
+import Model from '../components/canvas/office/Scene';
+
+export async function getStaticProps() {
+  const { publicURL, error } = await supabase.storage
+    .from('models')
+    .getPublicUrl('60s_office_props/scene.gltf');
+  if (error) {
+    throw error;
+  }
+  return {
+    props: { publicURL }, // will be passed to the page component as props
+  };
+
+  if (!publicURL) {
+    return {
+      notFound: true,
+    };
+  }
+}
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -9,36 +27,7 @@ import dynamic from 'next/dynamic';
 // const BoxComponent = dynamic(() => import('@/components/canvas/Box'), {
 //   ssr: false,
 // });
-const ModelComponent = dynamic(() => import('@/components/canvas/Model'), {
-  ssr: false,
-});
 
-// dom components goes here
-
-// canvas components goes here
-const R3F = () => {
-  return (
-    <>
-      <ModelComponent />
-    </>
-  );
-};
-
-const Page = () => {
-  return (
-    <>
-      {/* @ts-ignore */}
-      <R3F r3f />
-    </>
-  );
-};
-
-export default Page;
-
-export async function getStaticProps() {
-  return {
-    props: {
-      title: 'Index',
-    },
-  };
+export default function Page({ publicURL }) {
+  return <Model publicURL={publicURL} />;
 }
