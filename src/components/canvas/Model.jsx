@@ -26,7 +26,7 @@ export default function ModelComponent({ ...props }) {
     camera.updateProjectionMatrix();
   });
 
-  return (<>
+  return (<Suspense fallback={null}>
     <group ref={group} {...props} dispose={null} onClick={() => setActive(!active)}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
@@ -99,7 +99,7 @@ export default function ModelComponent({ ...props }) {
       </group>
     </group>
     <directionalLight position={[5, 5, 5]} />
-  </>)
+  </Suspense>)
 }
 
-// useGLTF.preload('/scene.gltf')
+useGLTF.preload('/models/emd_gp7_western_pacific_713/scene.gltf')
