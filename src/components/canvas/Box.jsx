@@ -1,9 +1,12 @@
 import { useFrame } from '@react-three/fiber';
 import { useRef, useState } from 'react';
 import * as THREE from 'three';
+import { useLoader } from '@react-three/fiber'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 const BoxComponent = ({ route }) => {
   // This reference will give us direct access to the THREE.Mesh object
+  const gltf = useLoader(GLTFLoader, '@/public/models/Poimandres.gltf')
   const mesh = useRef(null);
   const vec = new THREE.Vector3();
   // Set up state for the hovered and active state
@@ -19,6 +22,9 @@ const BoxComponent = ({ route }) => {
   // Return the view, these are regular Threejs elements expressed in JSX
   return (
     <>
+    <Suspense fallback={null}>
+      <primitive object={gltf.scene} />
+    </Suspense>
       <mesh ref={mesh} onClick={() => setActive(!active)}>
         <boxBufferGeometry args={[1, 1, 1]} />
         <meshPhysicalMaterial color='darkcyan' />

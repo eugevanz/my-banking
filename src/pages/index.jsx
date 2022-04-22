@@ -6,7 +6,10 @@ import dynamic from 'next/dynamic';
 // WARNING ! errors might get obfuscated by using dynamic import.
 // If something goes wrong go back to a static import to show the error.
 // https://github.com/pmndrs/react-three-next/issues/49
-const BoxComponent = dynamic(() => import('@/components/canvas/Box'), {
+// const BoxComponent = dynamic(() => import('@/components/canvas/Box'), {
+//   ssr: false,
+// });
+const ModelComponent = dynamic(() => import('@/components/canvas/Model'), {
   ssr: false,
 });
 
@@ -16,7 +19,7 @@ const BoxComponent = dynamic(() => import('@/components/canvas/Box'), {
 const R3F = () => {
   return (
     <>
-      <BoxComponent />
+      <ModelComponent />
     </>
   );
 };
