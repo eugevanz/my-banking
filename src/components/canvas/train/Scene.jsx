@@ -22,7 +22,7 @@ export default function Model({ publicURL }) {
     active ? vec.set(2, 0, 1.9) : vec.set(0, 0, 0.3);
     camera.fov = 50;
     camera.lookAt(0, 0, 0);
-    camera.position.lerp(vec, 0.06);
+    camera.position.lerp(vec, 0.5);
     camera.updateProjectionMatrix();
   });
 

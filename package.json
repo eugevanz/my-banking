@@ -19,16 +19,23 @@
   "devDependencies": {
     "@react-three/drei": "^9.5.0",
     "@react-three/fiber": "^8.0.12",
+    "autoprefixer": "^10.4.5",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.5.0",
+    "leva": "^0.9.23",
     "next": "^12.1.5",
+    "postcss": "^8.4.12",
     "prettier": "^2.6.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "tailwindcss": "^3.0.24",
     "three": "^0.139.2",
     "three-stdlib": "^2.9.1"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^1.35.1"
+    "@react-spring/three": "^9.4.4",
+    "@supabase/supabase-js": "^1.35.1",
+    "react-dat-gui": "^4.1.1",
+    "zustand": "^4.0.0-rc.0"
   }
 }

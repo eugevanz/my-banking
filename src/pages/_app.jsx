@@ -1,17 +1,9 @@
-import { Canvas } from '@react-three/fiber';
+import Layout from '../components/layout';
 
-function App({ Component, pageProps }) {
+export default ({ Component, pageProps }) => {
   return (
-    <Canvas
-      mode='concurrent'
-      style={{
-        position: 'absolute',
-        top: 0,
-      }}
-    >
+    <Layout>
       <Component {...pageProps} />
-    </Canvas>
+    </Layout>
   );
-}
-
-export default App;
+};
