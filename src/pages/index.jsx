@@ -1,15 +1,18 @@
 import { Canvas, useThree } from '@react-three/fiber';
 import { useControls } from 'leva';
 import supabase from '../helpers/supabaseClient';
-import Model from '../components/canvas/office/Scene.server';
+// import Model from '../components/canvas/north-sea/Scene.server';
+import Model from '../components/canvas/camera/Camera_01_4k.server';
 import useStore from '../helpers/stateManagement';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { useEffect } from 'react';
+import { Vector3 } from 'three';
 
 export async function getStaticProps() {
+  // https://clycjngosnmxbwpovsdc.supabase.co/storage/v1/object/public/models/Camera/Camera_01_4k.gltf
   const { publicURL, error } = await supabase.storage
     .from('models')
-    .getPublicUrl('60s_office_props/scene.gltf');
+    .getPublicUrl('Camera/Camera_01_4k.gltf');
   if (error) {
     throw error;
   }
@@ -33,30 +36,29 @@ function CameraController() {
 }
 
 export default function Page({ publicURL }) {
-  const {
-    frustrum: { position },
-  } = useStore();
+  // const {
+  //   frustrum: { position },
+  // } = useStore();
 
-  // const { left, right, top, bottom, zoom } = useControls({
-  //   left: { value: -2, step: 0.1 },
-  //   right: { value: 2, step: 0.1 },
-  //   top: { value: 2, step: 0.1 },
-  //   bottom: { value: -2, step: 0.1 },
-  //   zoom: { value: 100, step: 0.1 },
-  // });
+  const { x, y, z, zoom } = useControls({
+    x: { value: -42, step: 0.1 },
+    y: { value: 0, step: 0.1 },
+    z: { value: 0, step: 0.1 },
+    zoom: { value: 20, step: 0.1 },
+  });
 
   return (
     <>
       <Canvas
         orthographic
-        camera={{ zoom: 100 }}
+        camera={{ zoom: 0 }}
         mode='concurrent'
         style={{ height: '100vh' }}
       >
-        <Model publicURL={publicURL} position={position} />
+        <Model publicURL={publicURL} />
         <CameraController />
-        <ambientLight />
-        <pointLight position={position} castShadow />
+        {/* <ambientLight /> */}
+        <pointLight castShadow />
         <axesHelper args={[10]} />
       </Canvas>
     </>
